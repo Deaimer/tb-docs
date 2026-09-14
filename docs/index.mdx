@@ -1,67 +1,29 @@
 ---
-id: index
-title: Welcome to the handbook
+title: Benches
 slug: /
-sidebar_position: 1
-description: Deaimer's source-traceable operating manual for Terminal-Bench and Terminal-Bench-Science authors and reviewers.
+description: Deaimer's internal authoring and review manuals for Terminal-Bench, Terminal-Bench-Science, and SWE-bench.
 ---
 
-<span className="status-pill">Verified 13 September 2026</span>
+# Benches
 
-# Build benchmark tasks that survive review
+This portal contains three independent benchmark manuals. Choose the benchmark before creating a task; formats, evidence requirements, validation logic, and submission routes are not interchangeable.
 
-This is Deaimer’s internal operating manual for designing, implementing, testing, reviewing, and maintaining tasks for **Terminal-Bench** and **Terminal-Bench-Science**. It translates upstream requirements into a repeatable engineering workflow. It does not replace the upstream repositories or a maintainer’s decision.
-
-<div className="source-line"><strong>Source snapshot:</strong> Terminal-Bench <code>83c7a61</code> · TB-Science <code>ff55a1b</code> · Harbor <code>fd00491</code></div>
-
-:::warning Time-sensitive status
-TB-Science currently states that 0.2 pull requests are accepted until **5 October 2026**. Confirm this on the [upstream contributing page](https://github.com/harbor-framework/terminal-bench-science/blob/main/CONTRIBUTING.md) before planning work.
-:::
-
-<div className="hero-grid">
-  <a className="hero-card" href="/getting-started/quick-start"><h3>Start an authoring run →</h3><p>Pick the correct track, get the idea reviewed, initialize the task, and reach the first Oracle/NOP result.</p></a>
-  <a className="hero-card" href="/reviewing/reviewer-workflow"><h3>Open the reviewer desk →</h3><p>Review the contract, reference solution, verifier, security boundary, and scientific evidence in a fixed order.</p></a>
-  <a className="hero-card" href="/tracks/track-differences"><h3>Compare the two tracks →</h3><p>See the proposal routes, layouts, metadata, access assumptions, and scientific requirements side by side.</p></a>
-  <a className="hero-card" href="/reference/commands"><h3>Copy a command →</h3><p>Use the tested Harbor, Docker, Git, Oracle, NOP, and CI command reference.</p></a>
+<div className="portal-grid">
+  <a className="portal-card" href="./terminal-bench/"><span className="portal-kicker">Terminal work</span><h2>Terminal-Bench</h2><p>Long-horizon, economically valuable computer tasks completed through a terminal and scored by a deterministic verifier.</p></a>
+  <a className="portal-card" href="./terminal-bench-science/"><span className="portal-kicker">Scientific work</span><h2>Terminal-Bench-Science</h2><p>Authentic computational science workflows with defensible scientific ground truth, provenance, and domain-expert review.</p></a>
+  <a className="portal-card" href="./swe-bench/"><span className="portal-kicker">Repository repair</span><h2>SWE-bench</h2><p>Issue-driven software repair instances reconstructed from real repositories, commits, tests, and executable environments.</p></a>
 </div>
 
-## Latest handbook changes
+## Separation rule
 
-| Date | Type | Change |
-|---|---|---|
-| 2026-09-13 | Source refresh | Pinned current upstream commits for both benchmarks and Harbor. |
-| 2026-09-13 | New | Added separate authoring paths for Terminal-Bench and TB-Science. |
-| 2026-09-13 | New | Added reviewer desk: contract coherence, soundness, leakage, and severity. |
-| 2026-09-13 | New | Added local-only search and private Cloudflare Access deployment design. |
+Never reuse a task package unchanged across tracks.
 
-## The core rule
+| Track | Unit of work | Primary deliverable | Core evidence |
+|---|---|---|---|
+| Terminal-Bench | A self-contained terminal task | Harbor task directory | Oracle success, NOP failure, verifier soundness |
+| Terminal-Bench-Science | A real scientific workflow | Harbor science task plus scientific evidence | Domain validity, provenance, numerical and scientific checks |
+| SWE-bench | A repository issue at a fixed base commit | Structured instance and reproducible evaluation image | Gold patch, test patch, FAIL_TO_PASS and PASS_TO_PASS behavior |
 
-A task is a three-party contract:
+## Working agreement
 
-1. **The instruction** tells the agent what result is required.
-2. **The environment** makes that work possible without exposing privileged answers.
-3. **The verifier** accepts all materially correct results and rejects materially incorrect ones.
-
-The Oracle proves at least one valid solution exists. The NOP baseline proves doing nothing does not pass. Negative and mutation tests establish that plausible wrong answers also fail. Agent trials measure difficulty; they do not substitute for verifier validation.
-
-## Recommended reading paths
-
-**First-time author:** [How to use this handbook](./getting-started/how-to-use) → [Choose a track](./tracks/track-differences) → [Quality bar](./concepts/quality-bar) → [Quick start](./getting-started/quick-start).
-
-**Experienced task author:** [Track requirements](./tracks/track-differences) → [Artifact boundary](./concepts/artifact-boundary) → [Verifier](./authoring/verifier) → [CI preflight](./validation/ci-preflight).
-
-**Reviewer:** [Reviewer workflow](./reviewing/reviewer-workflow) → [Contract coherence](./reviewing/contract-coherence) → [Verifier soundness](./reviewing/verifier-soundness) → [Review checklist](./reviewing/review-checklist).
-
-**Science proposer:** [TB-Science track](./tracks/tb-science) → [Science-specific authoring](./authoring/science-specific) → [Proposal guide](./submission/proposals).
-
-## What “source-traceable” means
-
-Every policy-sensitive page identifies its authority. Labels are used consistently:
-
-| Label | Meaning |
-|---|---|
-| **Upstream requirement** | Explicitly required by a benchmark repository, rubric, CI check, or Harbor contract. |
-| **Deaimer standard** | Our stronger internal default for reducing review risk. |
-| **Recommendation** | Useful practice that may be adapted with a documented reason. |
-
-When this handbook conflicts with upstream, upstream wins. Open [Source registry](./reference/source-registry), compare the pinned commit with the current repository, and update the handbook before relying on changed behavior.
+Authors work on personal branches derived from `authors`. Reviewers assess pull requests and prepare accepted changes on `reviewers`. Only the repository owner promotes reviewed material into `main`. The complete commands are under **Contributing**.

@@ -1,16 +1,53 @@
 import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 
 const sidebars: SidebarsConfig = {
-  handbook: [
+  docs: [
     'index',
-    {type: 'category', label: 'Getting started', collapsed: false, items: ['getting-started/how-to-use', 'getting-started/quick-start', 'getting-started/prerequisites', 'getting-started/task-lifecycle']},
-    {type: 'category', label: 'Choose a track', collapsed: false, items: ['tracks/terminal-bench', 'tracks/tb-science', 'tracks/track-differences']},
-    {type: 'category', label: 'Understand tasks', items: ['concepts/quality-bar', 'concepts/task-anatomy', 'concepts/difficulty', 'concepts/determinism', 'concepts/artifact-boundary', 'concepts/security-model']},
-    {type: 'category', label: 'Build the task', items: ['authoring/instruction', 'authoring/task-toml', 'authoring/environment', 'authoring/solution', 'authoring/verifier', 'authoring/data-provenance', 'authoring/science-specific']},
-    {type: 'category', label: 'Test and validate', items: ['validation/local-validation', 'validation/oracle-nop', 'validation/negative-tests', 'validation/agent-trials', 'validation/reproducibility', 'validation/ci-preflight']},
-    {type: 'category', label: 'Reviewer desk', items: ['reviewing/reviewer-workflow', 'reviewing/contract-coherence', 'reviewing/verifier-soundness', 'reviewing/ground-truth-protection', 'reviewing/finding-severity', 'reviewing/review-checklist']},
-    {type: 'category', label: 'Submit and maintain', items: ['submission/proposals', 'submission/pull-requests', 'submission/responding-to-review', 'submission/maintenance']},
-    {type: 'category', label: 'Reference', items: ['reference/commands', 'reference/file-tree', 'reference/troubleshooting', 'reference/faq', 'reference/private-deployment', 'reference/source-registry', 'reference/changelog']},
+    {
+      type: 'category',
+      label: 'Terminal-Bench',
+      collapsed: false,
+      items: [
+        'terminal-bench/index',
+        'terminal-bench/authoring',
+        'terminal-bench/verification',
+        'terminal-bench/submission',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Terminal-Bench-Science',
+      collapsed: false,
+      items: [
+        'terminal-bench-science/index',
+        'terminal-bench-science/proposal',
+        'terminal-bench-science/authoring',
+        'terminal-bench-science/validation',
+        'terminal-bench-science/submission',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'SWE-bench',
+      collapsed: false,
+      items: [
+        'swe-bench/index',
+        'swe-bench/schema',
+        'swe-bench/collection',
+        'swe-bench/environment',
+        'swe-bench/submission',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Contributing',
+      items: [
+        'contributing/index',
+        'contributing/authors',
+        'contributing/reviewers',
+        'contributing/owner-controls',
+      ],
+    },
   ],
 };
 
