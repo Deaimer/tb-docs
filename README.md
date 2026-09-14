@@ -1,6 +1,10 @@
-# Deaimer Terminal-Bench Authoring Handbook
+# Benches
 
-Private, source-traceable Docusaurus portal for Terminal-Bench and Terminal-Bench-Science authors and reviewers.
+Deaimer's documentation portal for three separate benchmark tracks:
+
+- Terminal-Bench
+- Terminal-Bench-Science
+- SWE-bench
 
 ## Local development
 
@@ -9,14 +13,17 @@ npm ci
 npm run start
 ```
 
-Production validation:
+## Validation
 
 ```bash
 npm run typecheck
 npm run build
-npm run serve
 ```
 
-Source pins are recorded in `docs/reference/source-registry.md`. This is an internal Deaimer handbook; upstream repositories and maintainer decisions remain authoritative.
+## Branch model
 
-Static output is `build/`. Production targets Cloudflare Pages at `terminalbench.deaimer.com`, protected by Cloudflare Access. Required GitHub Actions secrets are `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`.
+- `authors`: author integration
+- `reviewers`: reviewed staging
+- `main`: owner-controlled publication
+
+The production site is deployed by GitHub Pages after changes reach `main`.
