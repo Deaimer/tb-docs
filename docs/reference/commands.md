@@ -15,6 +15,16 @@ harbor run --help
 docker version
 ```
 
+Install GitHub CLI and `jq` as local support tools. API keys are needed only for the model providers actually used by rubric review, agent trials, or analysis:
+
+```bash
+export ANTHROPIC_API_KEY='...'
+export OPENAI_API_KEY='...'
+export GEMINI_API_KEY='...'
+```
+
+Never place these exports in a committed file.
+
 ## Repository and branch
 
 ```bash
@@ -45,6 +55,14 @@ bash -n tasks/example-task/solution/solve.sh
 bash -n tasks/example-task/tests/test.sh
 ```
 
+## Confirm package metadata
+
+```bash
+grep -nE '^(schema_version|artifacts|name|category|subcategory|expert_time_estimate_hours|environment_mode|network_mode)' \
+  tasks/example-task/task.toml
+tail -n 3 tasks/example-task/instruction.md
+```
+
 ## Clean images
 
 ```bash
@@ -64,10 +82,25 @@ harbor tasks start-env -p tasks/example-task -e docker -a -i
 
 ```bash
 harbor check tasks/example-task -r docs/prompts/task-implementation.toml
-harbor run -p tasks/example-task -a AGENT_NAME -m PROVIDER/MODEL
+harbor run -p tasks/example-task --agent AGENT_NAME -m PROVIDER/MODEL
 harbor analyze PATH_TO_JOB \
+  -m sonnet \
   -r docs/prompts/trial-analysis.toml \
   --job-prompt docs/prompts/trial-analysis-job.txt
+```
+
+## Pull-request automation commands
+
+These are PR comments, not shell commands:
+
+```text
+/overview
+/review
+/validate
+/validate env=docker
+/run trials=5
+/cheat
+/fortify
 ```
 
 ## Commit and submit

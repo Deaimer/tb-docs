@@ -13,7 +13,10 @@ description: Diagnose common build, run, artifact, verifier, CI, and deployment 
 | Oracle produces file but verifier says missing | instruction path, `artifacts`, actual path | make all three identical absolute paths |
 | Oracle and NOP both pass | baked/stale outputs, weak existence test | remove precomputed output; clean lifecycle; assert semantics |
 | Valid alternate answer fails | Oracle-coupled ordering/format/tolerance | normalize only ungraded variation; test contract semantics |
-| Verifier crashes on bad output | unsafe parsing and uncaught exceptions | validate structure first; fail closed and emit reward |
+| Verifier crashes on bad output | unsafe parsing and uncaught exceptions | validate structure first; return a controlled zero for an ordinary invalid artifact |
+| CTRF is missing | pytest lacks `--ctrf`, path is wrong, or unprivileged test cannot write it | write to an allowed temp path and have root copy to `/logs/verifier/ctrf.json` |
+| CI rejects task slug | folder contains more than three hyphen tokens | rename folder and `[task].name` together |
+| CI rejects internet field | stale `allow_internet` example | regenerate from the current template; use its public network configuration |
 | Flaky numeric result | seeds, thread reductions, thresholds | seed/control parallelism; justify tolerance |
 | Agent cannot start | UID, shell, path, service readiness | reproduce with harness identity and health checks |
 | CI rejects metadata | stale template or invented field | regenerate/compare with target repo template |
@@ -29,8 +32,7 @@ npm run build
 - Broken-link errors: use the local route without `.md`, or correct the upstream URL.
 - Duplicate route: remove a page under `src/pages` that conflicts with docs at `/`.
 - Search plugin errors: ensure package and Docusaurus major versions are compatible.
-- Cloudflare 404 on direct route: serve the generated static route files and keep `trailingSlash`/redirect behavior consistent.
-- Site is publicly reachable: Pages deployment succeeded but Access policy is missing or bypassed; treat as a security incident and restrict the hostname immediately.
+- GitHub Pages returns 404: confirm the repository is `tb-docs`, Pages uses GitHub Actions, and the deployment workflow completed on `main`.
 
 ## Escalation packet
 

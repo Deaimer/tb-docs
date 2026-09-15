@@ -7,7 +7,7 @@ description: Exact Terminal-Bench naming, branch, Harbor initializer, and skelet
 
 ## 1. Choose a slug
 
-Use lowercase kebab-case describing the work, such as `repair-sharded-postgres-replication`. Avoid spaces, capitals, generic labels, answer-revealing terms, and existing task names.
+Use lowercase kebab-case with **no more than three hyphen-separated tokens**, such as `repair-postgres-replication`. Avoid spaces, capitals, generic labels, answer-revealing terms, and existing task names. CI rejects longer slugs.
 
 ## 2. Start from reviewed
 
@@ -36,6 +36,8 @@ harbor tasks init example-task \
 
 The generated directory is `tasks/example-task/`. The metadata template from the private repository is authoritative.
 
+If `docs/task-template.toml` or `scripts/checks/` is absent, the private dataset repository has not been bootstrapped. Do not initialize from memory or copy a task from an older release. Ask the owner to synchronize the current template and checks first.
+
 ## 4. Verify the skeleton
 
 ```bash
@@ -45,4 +47,6 @@ sed -n '1,240p' tasks/example-task/instruction.md
 git status --short
 ```
 
-Required files are `README.md`, `instruction.md`, `task.toml`, `environment/Dockerfile`, `solution/solve.sh`, `tests/Dockerfile`, and `tests/test.sh`. Preserve initializer canaries. Replace all placeholders before requesting review.
+Required files are `README.md`, `instruction.md`, `task.toml`, `environment/Dockerfile`, `solution/solve.sh`, `tests/Dockerfile`, and `tests/test.sh`. Preserve the exact initializer canary in every checked text file. Replace all placeholders before requesting review.
+
+The generated `task.toml` must include `schema_version = "2.0"`, `[task].name = "terminal-bench/example-task"`, metadata, top-level artifacts, separate-verifier configuration, and resource limits. Never hand-add fields that are absent from the current Harbor schema.

@@ -13,7 +13,9 @@ A task is complete only when every item is true. Oracle `1.0` and NOP `0.0` are 
 - Every enforced rule is public; every material public rule is tested.
 - Current template, taxonomy, metadata, and canaries are used.
 - Artifacts match across instruction, TOML, Oracle, and verifier.
-- README truthfully explains difficulty, solution, verification, and experience.
+- README truthfully explains difficulty, solution, verification, and experience in the human author's own words.
+- Slug has no more than three tokens; `[task].name` is `terminal-bench/<slug>`.
+- `schema_version`, taxonomy, expert estimate, network mode, and fields match the current template/schema.
 
 ## Execution
 
@@ -22,6 +24,7 @@ A task is complete only when every item is true. Oracle `1.0` and NOP `0.0` are 
 - Randomness, services, permissions, and resources are controlled.
 - Oracle returns `1.0` twice from clean jobs.
 - NOP returns intentional `0.0` twice from clean jobs.
+- Every repository static check and the implementation-rubric review passes or has an explicit maintainer disposition.
 
 ## Verifier and security
 
@@ -29,6 +32,10 @@ A task is complete only when every item is true. Oracle `1.0` and NOP `0.0` are 
 - Malformed, partial, boundary, plausible-wrong, oversized, and filesystem-attack artifacts fail safely.
 - Controlled failures still emit valid results.
 - Agent cannot access solution, tests, ground truth, credentials, or privileged services.
+- Agent-produced code executes unprivileged inside the verifier and cannot reach the root-only reward channel.
+- Discrete tests emit `/logs/verifier/ctrf.json`; reward is binary on every scoreable path.
+- Every do-not-modify constraint is enforced.
+- Maintainer-triggered agent, cheat, and any required fortify trials are reviewed.
 - Repeated verdicts agree.
 
 ## Submission

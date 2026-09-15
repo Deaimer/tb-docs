@@ -8,6 +8,8 @@ description: Complete Deaimer operating manual for Terminal-Bench task authors a
 
 This is Deaimer’s complete working manual for designing, implementing, testing, reviewing, and submitting standard Terminal-Bench tasks.
 
+<div className="source-line"><strong>Verified:</strong> 15 September 2026 · <strong>Official baseline:</strong> Terminal-Bench upstream commit <code>e2995b93</code></div>
+
 :::warning Scope
 This repository contains **Terminal-Bench documentation only**. Task packages are stored separately in the private `Deaimer/terminal-bench-dataset` repository.
 :::
@@ -16,7 +18,7 @@ This repository contains **Terminal-Bench documentation only**. Task packages ar
   <a className="hero-card" href="./getting-started/quick-start"><span className="status-pill">Start here</span><h3>Initialize a task</h3><p>Install tools, clone the private dataset, create the correct branch, and initialize the complete skeleton.</p></a>
   <a className="hero-card" href="./validation/oracle"><span className="status-pill">Required</span><h3>Run Oracle</h3><p>Prove the reference solution works from clean state and reaches reward 1.0.</p></a>
   <a className="hero-card" href="./validation/nop"><span className="status-pill">Required</span><h3>Run NOP</h3><p>Prove untouched state receives reward 0.0 without an infrastructure failure.</p></a>
-  <a className="hero-card" href="./submission/branch-workflow"><span className="status-pill">Private dataset</span><h3>Push correctly</h3><p>Authors push personal task branches to reviewed; only the owner promotes reviewed work to main.</p></a>
+  <a className="hero-card" href="./submission/branch-workflow"><span className="status-pill">Private dataset</span><h3>Push correctly</h3><p>Authors open personal-task PRs into reviewed; only the owner promotes reviewed work to main.</p></a>
 </div>
 
 ## A complete task
@@ -31,5 +33,7 @@ This repository contains **Terminal-Bench documentation only**. Task packages ar
 | Security | Agent cannot access solution, tests, ground truth, or credentials |
 | Reproducibility | Clean repetitions produce stable verdicts |
 | Submission | One task branch, one PR into `reviewed`; never directly into `main` |
+
+The task format and quality rules follow the [official Terminal-Bench contribution guide](https://github.com/harbor-framework/terminal-bench/blob/main/CONTRIBUTING.md). Internal repository and approval rules are stricter where needed to protect the private dataset.
 
 Use the left navigation in order. The manual explains prerequisites, initialization, every task file, exact validation commands, log diagnosis, completion criteria, private-repository branches, pull requests, and reviewer decisions.

@@ -25,7 +25,7 @@ Assume the agent can inspect everything in its container, read process-visible c
 
 ## Review procedure
 
-Inspect the final image, not only the Dockerfile. Search for solution filenames, expected values, canary text, credentials, test data, and shell history. Enumerate mounted paths and service networks. Run the verifier against hand-built adversarial artifacts. Verify that internet access matches the selected track’s current policy rather than being used as a difficulty lever.
+Inspect the final image, not only the Dockerfile. Search for solution filenames, expected values, credentials, test data, and shell history. The required canary is expected and is not an answer leak. Enumerate mounted paths and service networks. Run the verifier against hand-built adversarial artifacts. Terminal-Bench is open internet; never disable access merely to create difficulty, and never expose credentials or task-specific answers.
 
 :::danger Never place secrets in Git history
 Removing a secret in a later commit does not remove it from prior objects. Rotate the credential immediately and follow the organization’s history-remediation procedure.

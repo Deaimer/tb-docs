@@ -11,6 +11,14 @@ Run trials only after deterministic Oracle, NOP, positive, negative, and leakage
 
 Record agent/model version, harness version, task commit, runtime settings, network mode, seed or sampling settings, timeout, reward, and trajectory location. Do not pool runs from different task revisions as if they were identical.
 
+```bash
+harbor run -p tasks/example-task --agent AGENT_NAME -m PROVIDER/MODEL
+harbor analyze PATH_TO_JOB \
+  -m sonnet \
+  -r docs/prompts/trial-analysis.toml \
+  --job-prompt docs/prompts/trial-analysis-job.txt
+```
+
 ## Analyze trajectories
 
 For each run, mark:
@@ -21,6 +29,8 @@ For each run, mark:
 4. Where did implementation diverge?
 5. Did it use feedback and recover?
 6. Was failure caused by timeout, infrastructure, or verifier behavior?
+
+The official analysis also reports task-specification problems, reward hacking, whether the observed failure matches the stated difficulty crux, refusals, and low-timeout failures. Any of those can invalidate a raw failure as evidence of meaningful difficulty.
 
 Report the earliest causal failure, not merely the final test message.
 
