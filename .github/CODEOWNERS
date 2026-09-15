@@ -1,5 +1,5 @@
 * @msawan-deaimer
-/docs/terminal-bench/ @msawan-deaimer
-/docs/terminal-bench-science/ @msawan-deaimer
-/docs/swe-bench/ @msawan-deaimer
 /.github/ @msawan-deaimer
+/docs/ @msawan-deaimer
+/docusaurus.config.ts @msawan-deaimer
+/sidebars.ts @msawan-deaimer

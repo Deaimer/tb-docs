@@ -1,35 +1,18 @@
-## Benchmark
+## Terminal-Bench documentation change
 
-- [ ] Terminal-Bench
-- [ ] Terminal-Bench-Science
-- [ ] SWE-bench
-- [ ] Portal/contributor workflow
-
-## Role
-
-- [ ] Author
-- [ ] Reviewer
-- [ ] Owner promotion
-
-## Summary
-
-Describe exactly what changed and why.
+Describe what changed, why it was necessary, and which author or reviewer
+workflow it affects.
 
 ## Validation
 
-- [ ] `npm run typecheck`
-- [ ] `npm run build`
-- [ ] Internal links checked
-- [ ] No upstream external links added
-- [ ] Content stays within one benchmark track
-- [ ] Technical claims were checked against the current source material
+- [ ] I ran `npm run typecheck`.
+- [ ] I ran `npm run build`.
+- [ ] I checked that commands and paths match the private dataset workflow.
+- [ ] I did not add material from an unrelated benchmark.
+- [ ] I did not add links that send readers to external benchmark documentation.
+- [ ] I reviewed the rendered pages for broken navigation or unclear steps.
 
-## Evidence and uncertainty
+## Owner merge
 
-List the source verification date, assumptions, unresolved questions, and reviewer evidence.
-
-## Promotion
-
-- [ ] Author PR targets `authors`
-- [ ] Reviewer PR targets `reviewers`
-- [ ] Only owner promotion targets `main`
+Contributors must not push to `main`. The repository owner performs the final
+review and merge after all required checks pass.

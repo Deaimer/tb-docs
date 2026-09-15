@@ -3,14 +3,14 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'Benches',
-  tagline: 'Independent authoring and review manuals',
+  title: 'Terminal-Bench Authoring Manual',
+  tagline: 'Complete internal operating manual for Terminal-Bench task authors and reviewers',
   favicon: 'img/deaimer-mark.svg',
   future: {v4: true},
   url: 'https://deaimer.github.io',
-  baseUrl: '/benches/',
+  baseUrl: '/tb-docs/',
   organizationName: 'Deaimer',
-  projectName: 'benches',
+  projectName: 'tb-docs',
   trailingSlash: false,
   onBrokenLinks: 'throw',
   onBrokenAnchors: 'throw',
@@ -39,41 +39,41 @@ const config: Config = {
   }]],
   themeConfig: {
     image: 'img/deaimer-social-card.svg',
-    metadata: [{name: 'description', content: 'Deaimer manuals for Terminal-Bench, Terminal-Bench-Science, and SWE-bench authors and reviewers.'}],
+    metadata: [{name: 'description', content: 'Deaimer Terminal-Bench task authoring, validation, review, and submission manual.'}],
     announcementBar: {
-      id: 'separated_benches_2026_09',
-      content: '<strong>Choose one benchmark track.</strong> Formats and review rules are not interchangeable.',
+      id: 'tb_manual_2026_09',
+      content: '<strong>Terminal-Bench only.</strong> Build cleanly, prove Oracle = 1 and NOP = 0, then submit to the private review branch.',
       backgroundColor: '#fff3df',
       textColor: '#8a4615',
       isCloseable: true,
     },
     colorMode: {defaultMode: 'light', respectPrefersColorScheme: true},
     navbar: {
-      title: 'Benches',
+      title: 'Terminal-Bench',
       logo: {alt: 'Deaimer', src: 'img/deaimer-mark.svg'},
       items: [
         {to: '/', label: 'Home', position: 'left'},
-        {to: '/terminal-bench/', label: 'Terminal-Bench', position: 'left'},
-        {to: '/terminal-bench-science/', label: 'Terminal-Bench-Science', position: 'left'},
-        {to: '/swe-bench/', label: 'SWE-bench', position: 'left'},
-        {to: '/contributing/', label: 'Contributing', position: 'right'},
+        {to: '/getting-started/quick-start', label: 'Quick start', position: 'left'},
+        {to: '/validation/oracle', label: 'Oracle', position: 'left'},
+        {to: '/validation/nop', label: 'NOP', position: 'left'},
+        {to: '/submission/branch-workflow', label: 'Submit', position: 'right'},
       ],
     },
     footer: {
       style: 'dark',
       links: [
-        {title: 'Manuals', items: [
-          {label: 'Terminal-Bench', to: '/terminal-bench/'},
-          {label: 'Terminal-Bench-Science', to: '/terminal-bench-science/'},
-          {label: 'SWE-bench', to: '/swe-bench/'},
+        {title: 'Build', items: [
+          {label: 'Quick start', to: '/getting-started/quick-start'},
+          {label: 'Task anatomy', to: '/concepts/task-anatomy'},
+          {label: 'Complete task', to: '/validation/complete-task'},
         ]},
-        {title: 'Workflow', items: [
-          {label: 'Authors', to: '/contributing/authors'},
-          {label: 'Reviewers', to: '/contributing/reviewers'},
-          {label: 'Owner controls', to: '/contributing/owner-controls'},
+        {title: 'Validate and submit', items: [
+          {label: 'Oracle', to: '/validation/oracle'},
+          {label: 'NOP', to: '/validation/nop'},
+          {label: 'Private dataset workflow', to: '/submission/branch-workflow'},
         ]},
       ],
-      copyright: `© ${new Date().getFullYear()} Deaimer. Internal benchmark documentation portal.`,
+      copyright: `© ${new Date().getFullYear()} Deaimer. Internal Terminal-Bench operating manual.`,
     },
     prism: {
       theme: prismThemes.github,

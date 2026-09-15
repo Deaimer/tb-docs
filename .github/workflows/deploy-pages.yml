@@ -1,4 +1,4 @@
-name: Deploy Benches to GitHub Pages
+name: Deploy Terminal-Bench Docs to GitHub Pages
 
 on:
   push:

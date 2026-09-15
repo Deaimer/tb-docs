@@ -1,29 +1,35 @@
 ---
-title: Benches
+title: Terminal-Bench Authoring Manual
 slug: /
-description: Deaimer's internal authoring and review manuals for Terminal-Bench, Terminal-Bench-Science, and SWE-bench.
+description: Complete Deaimer operating manual for Terminal-Bench task authors and reviewers.
 ---
 
-# Benches
+# Terminal-Bench Authoring Manual
 
-This portal contains three independent benchmark manuals. Choose the benchmark before creating a task; formats, evidence requirements, validation logic, and submission routes are not interchangeable.
+This is Deaimer’s complete working manual for designing, implementing, testing, reviewing, and submitting standard Terminal-Bench tasks.
 
-<div className="portal-grid">
-  <a className="portal-card" href="./terminal-bench/"><span className="portal-kicker">Terminal work</span><h2>Terminal-Bench</h2><p>Long-horizon, economically valuable computer tasks completed through a terminal and scored by a deterministic verifier.</p></a>
-  <a className="portal-card" href="./terminal-bench-science/"><span className="portal-kicker">Scientific work</span><h2>Terminal-Bench-Science</h2><p>Authentic computational science workflows with defensible scientific ground truth, provenance, and domain-expert review.</p></a>
-  <a className="portal-card" href="./swe-bench/"><span className="portal-kicker">Repository repair</span><h2>SWE-bench</h2><p>Issue-driven software repair instances reconstructed from real repositories, commits, tests, and executable environments.</p></a>
+:::warning Scope
+This repository contains **Terminal-Bench documentation only**. Task packages are stored separately in the private `Deaimer/terminal-bench-dataset` repository.
+:::
+
+<div className="hero-grid">
+  <a className="hero-card" href="./getting-started/quick-start"><span className="status-pill">Start here</span><h3>Initialize a task</h3><p>Install tools, clone the private dataset, create the correct branch, and initialize the complete skeleton.</p></a>
+  <a className="hero-card" href="./validation/oracle"><span className="status-pill">Required</span><h3>Run Oracle</h3><p>Prove the reference solution works from clean state and reaches reward 1.0.</p></a>
+  <a className="hero-card" href="./validation/nop"><span className="status-pill">Required</span><h3>Run NOP</h3><p>Prove untouched state receives reward 0.0 without an infrastructure failure.</p></a>
+  <a className="hero-card" href="./submission/branch-workflow"><span className="status-pill">Private dataset</span><h3>Push correctly</h3><p>Authors push personal task branches to reviewed; only the owner promotes reviewed work to main.</p></a>
 </div>
 
-## Separation rule
+## A complete task
 
-Never reuse a task package unchanged across tracks.
+| Gate | Required outcome |
+|---|---|
+| Structure | All template files and metadata are complete |
+| Environment | Cold build succeeds without privileged material |
+| Oracle | Two independent runs receive `1.0` |
+| NOP | Two independent runs receive `0.0` |
+| Verifier | Valid alternatives pass; malformed, partial, and plausible-wrong outputs fail |
+| Security | Agent cannot access solution, tests, ground truth, or credentials |
+| Reproducibility | Clean repetitions produce stable verdicts |
+| Submission | One task branch, one PR into `reviewed`; never directly into `main` |
 
-| Track | Unit of work | Primary deliverable | Core evidence |
-|---|---|---|---|
-| Terminal-Bench | A self-contained terminal task | Harbor task directory | Oracle success, NOP failure, verifier soundness |
-| Terminal-Bench-Science | A real scientific workflow | Harbor science task plus scientific evidence | Domain validity, provenance, numerical and scientific checks |
-| SWE-bench | A repository issue at a fixed base commit | Structured instance and reproducible evaluation image | Gold patch, test patch, FAIL_TO_PASS and PASS_TO_PASS behavior |
-
-## Working agreement
-
-Authors work on personal branches derived from `authors`. Reviewers assess pull requests and prepare accepted changes on `reviewers`. Only the repository owner promotes reviewed material into `main`. The complete commands are under **Contributing**.
+Use the left navigation in order. The manual explains prerequisites, initialization, every task file, exact validation commands, log diagnosis, completion criteria, private-repository branches, pull requests, and reviewer decisions.
