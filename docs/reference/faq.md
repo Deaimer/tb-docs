@@ -21,6 +21,22 @@ Only in the private `Deaimer/terminal-bench-dataset` repository. This `tb-docs` 
 
 No. You need repeated Oracle passes, repeated intentional NOP failures, alternate-valid acceptance, negative/mutation rejection, isolation, reproducibility, and agent-failure analysis.
 
+## Must authors write anything themselves?
+
+Yes. The official guide requires the author to write `instruction.md`, the four task-README explanations, and the task PR answers personally.
+
+## What is the required task name?
+
+The folder slug has at most three hyphen-separated tokens and `[task].name` is exactly `terminal-bench/<slug>`.
+
+## Where do pytest dependencies go?
+
+In `tests/Dockerfile`, pinned to the current repository-wide versions. Do not install verifier tooling or fetch external resources from `tests/test.sh`.
+
+## What files reach the verifier?
+
+Only top-level declared artifacts, files baked into the verifier image, and explicitly collected or persistent sidecar state. The verifier does not inherit the agent container.
+
 ## Can hidden tests enforce hidden requirements?
 
 No. Hidden values and cases are allowed; hidden behavioral requirements are not.

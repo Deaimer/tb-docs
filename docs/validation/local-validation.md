@@ -31,7 +31,16 @@ Typical runs:
 ```bash
 harbor run -p tasks/my-task -a oracle
 harbor run -p tasks/my-task -a nop
+harbor check tasks/my-task -r docs/prompts/task-implementation.toml
 ```
+
+For interactive debugging:
+
+```bash
+harbor tasks start-env -p tasks/my-task -e docker -a -i
+```
+
+This starts the agent environment; it does not mount the Oracle or hidden verifier material. Use it to inspect paths, services, permissions, and dependencies, then exit and rerun validation in a new clean job.
 
 ## Inspect more than reward
 

@@ -5,14 +5,14 @@ description: Branch hygiene, PR evidence, upstream targeting, and review-ready p
 
 <div className="source-line"><strong>Authority:</strong> target repository contribution guide and PR template</div>
 
-## Before opening
+## Before opening the internal dataset PR
 
 ```bash
-git fetch upstream
-git rebase upstream/main
+git fetch origin --prune
+git rebase origin/reviewed
 git status --short
-git diff --check upstream/main...HEAD
-git diff --stat upstream/main...HEAD
+git diff --check origin/reviewed...HEAD
+git diff --stat origin/reviewed...HEAD
 ```
 
 Run the live repository checks after rebasing. Re-run Oracle/NOP if the rebase changes Harbor config, templates, CI, or shared code.
@@ -25,7 +25,7 @@ Prefer one task per PR. Do not include local jobs, caches, dataset downloads, ge
 
 Include:
 
-- approved proposal/discussion link where applicable;
+- summary of the internal idea approval and any maintainer feedback;
 - task summary and intended capability;
 - taxonomy and author identity;
 - exact validation commands and results;
@@ -35,12 +35,12 @@ Include:
 - dataset/provenance/license notes;
 - known limitations or open questions.
 
-Use the repository’s current template as authoritative. Do not delete prompts simply because they repeat README content.
+The author must answer the PR template personally. For a new task, state whether maintainers were consulted, confirm `instruction.md` was human-written, name the strong model tested, and explain why it failed for the intended reason. For a task fix, describe exactly what changed and why.
 
 ## Commit quality
 
 Keep commits reviewable: skeleton/data, environment, Oracle, verifier, evidence/documentation, and fixes are reasonable boundaries. Never rewrite public history after reviewers begin without explaining what changed and preserving traceability.
 
-## Fork synchronization
+## Internal versus official submission
 
-Target the correct upstream base branch. Ensure CI has permission to run safely on fork code. Do not place secrets into workflows triggered from untrusted forks.
+Authors submit to the private dataset's `reviewed` branch. They do not independently open an official Terminal-Bench PR. After internal approval, the owner decides whether and when a task is proposed or submitted upstream. If that happens, the official route is fork → task branch → PR to the official repository's current default branch, using the official human-written PR template.

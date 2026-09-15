@@ -29,9 +29,9 @@ Run at least one independently produced valid result. The verifier must not dema
 
 Demand evidence that the pass boundary separates acceptable and unacceptable work and remains stable across supported hardware. Check exact boundary semantics.
 
-### Reward path
+### Reward and execution path
 
-Ensure exceptions and partial test failures cannot accidentally emit success, reuse an old reward, or skip critical tests. Verify the final reward aggregates components as documented.
+Ensure exceptions and partial test failures cannot accidentally emit success, reuse an old reward, or skip critical tests. Verify the final reward is binary, root-controlled, and consistent with complete CTRF output. If the verifier imports or executes agent work, confirm it runs unprivileged and cannot write the reward directory.
 
 ## Minimum adversarial corpus
 

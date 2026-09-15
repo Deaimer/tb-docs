@@ -14,11 +14,25 @@ A verifier must reject wrong solutions, not only accept the reference solution.
 3. **Domain invariants:** conservation, constraints, monotonicity, consistency, or other necessary properties.
 4. **Core correctness:** compare against hidden cases, recompute results independently, or measure a justified objective.
 5. **Performance/quality:** only after correctness; use documented thresholds and stable timing methodology.
-6. **Reward emission:** always write the expected result/reward files, including controlled failures.
+6. **Reporting:** discrete checks emit CTRF; ordinary wrong answers emit binary reward `0`; correct answers emit `1`; infrastructure/capture failure remains an error rather than being laundered into a score.
 
 ## Separate environment
 
-Bake verifier code, private fixtures, and ground truth into `tests/Dockerfile`. Transfer only declared artifacts. Avoid reaching back into the agent container. Disable verifier networking unless the current platform contract explicitly requires it.
+Bake verifier code, private fixtures, ground truth, `pytest==9.1.1`, and `pytest-json-ctrf==0.5.2` into `tests/Dockerfile`. The image must `COPY` the tests into `/tests/` and pre-create the parent of every declared artifact. Transfer only declared artifacts. `test.sh` must not download verifier tooling or fetch external trial-time resources.
+
+```dockerfile
+FROM python:3.13-slim-bookworm
+RUN pip install --no-cache-dir pytest==9.1.1 pytest-json-ctrf==0.5.2
+WORKDIR /tests
+COPY . /tests/
+RUN mkdir -p /app
+```
+
+## Safe reward and CTRF pattern
+
+Before executing any untrusted agent code, root makes `/logs/verifier` mode `700`. Run the untrusted program or pytest process as an unprivileged account, capture its exit code/output in root-controlled logic, terminate its process group, and let the root wrapper write `/logs/verifier/reward.txt`. Every reachable score is exactly `0` or `1`; continuous diagnostics belong in CTRF or stdout.
+
+Pytest suites write per-test evidence to `/logs/verifier/ctrf.json`. If pytest itself runs unprivileged, write CTRF to an accessible temporary path and let the trusted root wrapper copy it into the root-only log directory afterward.
 
 ## Test semantics, not syntax
 
@@ -26,7 +40,9 @@ Accept all outputs allowed by the instruction. Normalize harmless differences su
 
 ## Defensive parsing
 
-Before computing metrics, reject duplicate identifiers, unknown identifiers, missing rows, NaN/Inf, unexpected dimensions, truncated data, unsafe archives, and unreasonably large strings or arrays. Put explicit time/memory bounds around parsers and subprocesses.
+Before computing metrics, reject duplicate identifiers, unknown identifiers, missing rows, NaN/Inf, unexpected dimensions, truncated data, unsafe archives, symlinks/special files where inappropriate, and unreasonably large strings or arrays. Put explicit time/memory bounds around parsers and subprocesses.
+
+When the instruction says a concrete file, table, declaration, service, or history element must remain unchanged, create a checksum, pristine-copy, or semantic check that makes a violating shortcut fail. A written prohibition without enforcement is a verifier defect.
 
 ## Test isolation
 

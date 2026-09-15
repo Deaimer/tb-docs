@@ -7,7 +7,7 @@ description: Release checklist for proposal, implementation, difficulty, evidenc
 
 ## Proposal
 
-- [ ] Correct benchmark track and taxonomy.
+- [ ] Correct Terminal-Bench scope and taxonomy.
 - [ ] Authentic paid/research workflow and concrete stakeholder value.
 - [ ] Truthful named author, affiliation, expertise, and disclosures.
 - [ ] Dataset exists, fits licensing/privacy constraints, and is obtainable.
@@ -22,7 +22,7 @@ description: Release checklist for proposal, implementation, difficulty, evidenc
 - [ ] All inputs, units, formats, paths, edge cases, and outputs are specified.
 - [ ] Clean build succeeds under declared resources.
 - [ ] Agent has required tools/permissions and no privileged truth.
-- [ ] Network and service boundaries match current track policy.
+- [ ] Public-network and service boundaries match current Terminal-Bench policy.
 - [ ] Artifact declarations exactly match contract and output.
 
 ## Solution and verifier

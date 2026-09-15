@@ -43,3 +43,18 @@ git branch -r
 ```
 
 If `origin/reviewed` is missing, stop and notify the owner. Do not substitute `main`.
+
+## Owner-only first-time bootstrap
+
+The owner performs this once after creating the private repository:
+
+```bash
+git switch main
+git pull --ff-only origin main
+git switch -c reviewed
+git push -u origin reviewed
+```
+
+Before inviting authors, the owner must also synchronize the official `docs/task-template.toml`, `docs/TAXONOMY.md`, `docs/prompts/`, and `scripts/checks/` scaffold into the private repository. Without those files, the documented initializer and local validation commands cannot work.
+
+Repository rules should block direct pushes to `main` and `reviewed`, require pull requests and required CI checks, require owner/code-owner approval for `main`, prevent authors from approving their own changes, and restrict force pushes and deletion. Contributors receive only the minimum access needed to push personal branches.

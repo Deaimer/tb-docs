@@ -9,10 +9,10 @@ The environment should expose everything needed to do the work and nothing that 
 
 ## Dockerfile discipline
 
-Pin the base image and material dependencies. Combine package-index refresh with installation, delete package metadata, and use noninteractive installs. Do not depend on files outside the task’s Docker build context.
+Pin application/library dependencies where the ecosystem supports historical versions. Do **not** pin apt package versions: ordinary apt mirrors discard old point versions and CI rejects apt pins. Combine package-index refresh with installation, delete apt metadata, and do not depend on files outside the task’s Docker build context. Do not add `FROM --platform=...`; choose architecture-specific assets using `TARGETARCH` or `uname -m` when necessary.
 
 ```dockerfile
-FROM python:3.12-slim@sha256:REPLACE_WITH_VERIFIED_DIGEST
+FROM python:3.12-slim
 
 RUN apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
@@ -36,10 +36,12 @@ Use neutral filenames and paths. `hidden_answer.csv`, `gold_labels`, or a datase
 
 Use services when the capability requires an authentic API, database, simulator, or isolation boundary. Give the agent only the documented interface. Seed service state deterministically. Add health checks. Ensure startup ordering does not depend on a fixed sleep. Keep databases and privileged service files off the agent filesystem.
 
-## Permissions
+## Agent privilege and threat model
 
-Run agent work without unnecessary root privileges. Ensure only required output directories are writable. Test behavior under the same UID, mounts, and shell used by Harbor. A task that works only in an interactive root shell is not ready.
+Assume the agent runs as root inside its container. It can inspect the complete agent image, replace commands, alter `/app`, start background processes, and attempt to poison outputs. File permissions inside the agent image are not sufficient to hide ground truth. Keep solutions, tests, expected outputs, private fixtures, and privileged credentials out of the agent image entirely.
+
+The separate verifier is the trust boundary. When it executes agent-produced code, that code must be dropped to an unprivileged user while the reward directory remains root-only.
 
 ## Build reproducibility
 
-Test with a cold cache and, where feasible, on the target architecture. Record image size and build duration. Rebuild periodically: tags move, package repositories retire artifacts, and external URLs disappear.
+Test with a cold cache and, where feasible, on the target architecture. Record image size and build duration. Rebuild periodically: tags move, package repositories retire artifacts, and external URLs disappear. Never use bare `nproc` to size parallel work because it can expose the host count instead of the configured container CPU limit.

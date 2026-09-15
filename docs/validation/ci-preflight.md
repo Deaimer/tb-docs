@@ -10,12 +10,23 @@ Repository checks evolve. Inspect `.github/workflows/`, `scripts/checks/`, and c
 ## Preflight order
 
 ```bash
-git fetch upstream
-git diff --check upstream/main...HEAD
+git fetch origin --prune
+git diff --check origin/reviewed...HEAD
 git status --short
 ```
 
-Then run the repository’s current task checks against only your task, followed by the relevant full validation suite. Check canary coverage, metadata/schema, instruction suffix, Dockerfile safety, artifact declarations, README sections, naming/taxonomy, and generated task index behavior.
+Then run the repository’s current task checks against only your task, followed by the full validation suite:
+
+```bash
+for check in scripts/checks/check-*.sh; do
+  bash "$check" tasks/example-task || exit 1
+done
+harbor check tasks/example-task -r docs/prompts/task-implementation.toml
+harbor run -p tasks/example-task --agent oracle
+harbor run -p tasks/example-task --agent nop
+```
+
+Check canary coverage, metadata/schema, instruction suffix, Dockerfile safety, artifact declarations, README sections, naming/taxonomy, separate verifier, trial-time network activity, dependency pins, architecture portability, CTRF output, binary reward, and generated task index behavior.
 
 ## Failure classification
 

@@ -29,15 +29,19 @@ harbor tasks init example-task \
 find tasks/example-task -maxdepth 3 -type f -print | sort
 ```
 
+The slug must contain at most three hyphen-separated tokens. The initializer must produce the canonical canary, schema version, package name, and current metadata scaffold.
+
 ## 3. Complete every component
 
 - `instruction.md`: public contract, absolute paths, schemas, constraints, exact timeout suffix.
-- `task.toml`: artifacts, metadata, timeouts, compute, internet, separate verifier.
+- `task.toml`: schema/package identity, top-level artifacts, metadata, timeouts, compute, public network mode, separate verifier.
 - `environment/`: reproducible agent tools, public inputs, required services.
 - `solution/solve.sh`: executable reference procedure.
 - `tests/Dockerfile`: isolated verifier with dependencies and hidden fixtures.
 - `tests/test.sh`: controlled test/result entry point.
 - `README.md`: difficulty, solution, verification, and relevant experience.
+
+Those four README explanations and the PR description must be written by the human author.
 
 ## 4. Validate
 
@@ -47,6 +51,7 @@ for check in scripts/checks/check-*.sh; do
 done
 harbor run -p tasks/example-task -a oracle
 harbor run -p tasks/example-task -a nop
+harbor check tasks/example-task -r docs/prompts/task-implementation.toml
 ```
 
 Required: Oracle `1.0`, NOP `0.0`, no infrastructure errors. Repeat both. Then run alternate-valid, malformed, partial, boundary, plausible-wrong, oversized, and filesystem-attack artifacts against the verifier.
@@ -62,4 +67,4 @@ git push -u origin author/YOUR_GITHUB_USERNAME/example-task
 gh pr create --base reviewed --head author/YOUR_GITHUB_USERNAME/example-task
 ```
 
-Never target `main`. Oracle and NOP alone do not make the task complete.
+Never target `main`. Oracle and NOP alone do not make the task complete. A reviewer must also inspect the 35 implementation criteria, real-agent failures, CTRF output, and adversarial shortcut resistance.

@@ -24,7 +24,7 @@ Filenames, row order, data partition keys, missingness patterns, image dimension
 
 ## Network review
 
-Map which services each container can reach. The agent should not access verifier or database internals. External internet behavior must follow the track policy; regular Terminal-Bench is explicitly open-internet, but that does not make credentials or task-specific answers acceptable.
+Map which services each container can reach. The agent should not access verifier or database internals. Terminal-Bench is explicitly open internet, but that does not make credentials or task-specific answers acceptable.
 
 ## Acceptance evidence
 

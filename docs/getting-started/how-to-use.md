@@ -22,7 +22,7 @@ Each phase has an exit condition:
 
 | Phase | Exit condition |
 |---|---|
-| Idea | Real, valuable workflow; correct track; named output; plausible objective evaluation. |
+| Idea | Real, valuable Terminal-Bench workflow; named output; plausible objective evaluation. |
 | Proposal | Maintainer confidence that scope, expertise, data, evaluation, and difficulty fit. |
 | Contract | Instruction, environment, solution, and verifier describe the same behavior. |
 | Local validation | Oracle passes, NOP fails, negative controls fail, repeated runs are stable. |
